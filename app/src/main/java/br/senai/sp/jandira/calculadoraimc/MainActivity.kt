@@ -35,17 +35,17 @@ class MainActivity : AppCompatActivity() {
         if (imc < 18.5)
             categoria = "abaixo do peso."
         else if (imc < 25)
-            categoria = "com peso normal."
+            categoria = " peso normal."
         else if (imc < 30)
             categoria = "acima do peso."
         else if (imc < 35)
-            categoria = "com obesidade grau I."
+            categoria = " obesidade grau I."
         else if (imc < 40)
-            categoria = "com obesidade grau II."
+            categoria = " obesidade grau II."
         else if (imc >=40)
-            categoria = "com obesidade morbida."
+            categoria = " obesidade morbida."
         else
-            categoria = "ERRO: Impossivel classificar IMC!"
+            categoria = "ERRO Não é possivel calcular seu IMC !"
 
 
         return categoria
