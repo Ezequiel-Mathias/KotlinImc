@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import org.w3c.dom.Text
-import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,31 +16,20 @@ class MainActivity : AppCompatActivity() {
         val resultadoMsg = findViewById<TextView>(R.id.resultadoMsg);
         val buttonCalcular = findViewById<Button>(R.id.buttonCalcular);
 
-        // limpando os TextView de resultado:
+        // fazendo a limpeza dos textViews de resultado:
         resultado.text = "";
         resultadoMsg.text = "";
 
         buttonCalcular.setOnClickListener { buttonCalcularOnClick() }
     }
 
-    /**
-     * Realiza o calculo do IMC com base nos valores passados como parametro.
-     *
-     * @param[altura] altura usada para o calculo.
-     * @param[peso] peso usado para o calculo.
-     * @return o resultado do calculo do IMC.
-     */
-    fun calcularIMC(altura : Double, peso : Double) : Double {
+
+    fun calculoIMC(altura : Double, peso : Double) : Double {
         return peso / (altura * altura)
     }
 
-    /**
-     * Realiza a classificação do [imc] passado como parametro.
-     *
-     * @param[imc] o imc usado para realizar a classificação.
-     * @return string com a classificação.
-     */
-    fun classificarIMC(imc : Double) : String {
+
+    fun classificaçaoIMC(imc : Double) : String {
         var categoria :String = ""
 
         if (imc < 18.5)
@@ -64,12 +51,7 @@ class MainActivity : AppCompatActivity() {
         return categoria
     }
 
-    /**
-     * quando necessario, gera um aviso e o renderiza no textView com id resultadoMsg.
-     *
-     * @param[Imc] imc usado para definir se o aviso deve ser exibido ou não.
-     */
-    fun gerarAviso(imc : Double) {
+    fun Aviso(imc : Double) {
         val resultadoMsg = findViewById<TextView>(R.id.resultadoMsg);
 
         if (imc >= 18.5 && imc <25) {
@@ -83,21 +65,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Evento de click do buttonCalcular
-     */
     fun buttonCalcularOnClick() {
-        // recebendo valores:
         val altura = findViewById<EditText>(R.id.editAltura).text.toString().toDouble();
         val peso = findViewById<EditText>(R.id.editPeso).text.toString().toDouble();
 
-        val imc = calcularIMC(altura, peso);
-        val categoria = classificarIMC(imc);
+        val imc = calculoIMC(altura, peso);
+        val categoria = classificaçaoIMC(imc);
 
-        // mostrando o resultado para o usuario:
         findViewById<TextView>(R.id.resultado).text = "seu imc é ${String.format("%.2f", imc)} e você esta ${categoria}"
-
-        // renderizando aviso:
-        gerarAviso(imc);
+        Aviso(imc);
     }
 }
